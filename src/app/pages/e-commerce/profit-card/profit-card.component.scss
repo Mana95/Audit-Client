@@ -1,0 +1,53 @@
+@import '../../../@theme/styles/themes';
+
+@include nb-install-component() {
+  .flip-icon {
+    position: absolute;
+    right: 0.625rem;
+    top: 1rem;
+    @include nb-rtl(right, auto);
+    @include nb-rtl(left, 0.625rem);
+    cursor: pointer;
+  }
+
+  ::ng-deep {
+    .front-container {
+      max-width: 100%;
+    }
+
+    .flipped {
+      .back-container {
+        .flip-icon {
+          transform: scaleX(-1);
+        }
+      }
+
+      .front-container {
+        .flip-icon {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.text-center{
+  text-align: center;
+}
+
+.status-background-color{
+
+  background-color: purple;
+  border-bottom-width: 0;
+  border-bottom-color: purple;
+  color: #ffffff;
+
+}
+.card-background-color{
+  background-color: purple;
+  border-bottom-width: 0;
+  border-bottom-color: purple;
+  color: #ffffff;
+}
+
+.adapted { background-color: rgba(0,0,0,0) }

@@ -1,0 +1,86 @@
+<h1 id="title" class="title">Login</h1>
+<p class="sub-title">Hello! Log in with your email.</p>
+
+<nb-alert *ngIf="error" outline="danger" role="alert">
+  <p class="alert-title"><b>Alert!</b></p>
+  <ul class="alert-message-list">
+    <li class="alert-message">{{errorMessage}}</li>
+  </ul>
+</nb-alert>
+<form [formGroup]="loginGroup" (ngSubmit)="onSubmit()"  aria-labelledby="title">
+
+  <div class="form-control-group">
+    <label class="label" for="input-email">Email address:</label>
+    <input type="text" nbInput formControlName="email"
+    [status]="submitted ?(formData.email.errors?'danger':'success'):'basic'"
+    fullWidth fieldSize="medium" placeholder="Email address">
+    <ng-container *ngIf="formData.email.errors && submitted">
+      <!-- <p class="caption status-danger" *ngIf="formData.email.errors.required">
+        Folder Name is required!
+      </p> -->
+      <p *ngIf="formData.email.errors.required"  class="caption status-danger">Emailname is required</p>
+    <p *ngIf="formData.email.errors.email"  class="caption status-danger">Email must be a valid email address</p>
+    </ng-container>
+
+
+
+
+
+  </div>
+
+  <div class="form-control-group">
+    <span class="label-with-link">
+      <label class="label" for="input-password">Password:</label>
+      <a class="forgot-password caption-2" routerLink="../request-password">Forgot Password?</a>
+    </span>
+    <input type="password" nbInput formControlName="password"
+    [status]="submitted ?(formData.password.errors?'danger':'success'):'basic'"
+    fullWidth fieldSize="medium" placeholder="Password">
+    <ng-container *ngIf="formData.password.errors && submitted">
+      <p class="caption status-danger" *ngIf="formData.password.errors.required">
+       Password is required!
+      </p>
+    </ng-container>
+
+  </div>
+
+  <!-- <div class="form-control-group accept-group">
+    <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe" *ngIf="rememberMe">Remember me</nb-checkbox>
+  </div> -->
+  <button type="submit" nbButton fullWidth size="large" status="primary">  Log In</button>
+  <!-- <button type="submit"
+          fullWidth
+          status="primary"
+          size="large"
+         >
+    Log In
+  </button> -->
+</form>
+
+<!-- <section *ngIf="socialLinks && socialLinks.length > 0" class="links" aria-label="Social sign in">
+  or enter with:
+  <div class="socials">
+    <ng-container *ngFor="let socialLink of socialLinks">
+      <a *ngIf="socialLink.link"
+         [routerLink]="socialLink.link"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
+      <a *ngIf="socialLink.url"
+         [attr.href]="socialLink.url"
+         [attr.target]="socialLink.target"
+         [attr.class]="socialLink.icon"
+         [class.with-icon]="socialLink.icon">
+        <nb-icon *ngIf="socialLink.icon; else title" [icon]="socialLink.icon"></nb-icon>
+        <ng-template #title>{{ socialLink.title }}</ng-template>
+      </a>
+    </ng-container>
+  </div>
+</section> -->
+
+<section class="another-action" aria-label="Register">
+  Don't have an account? <a class="text-link" routerLink="../register">Register</a>
+</section>

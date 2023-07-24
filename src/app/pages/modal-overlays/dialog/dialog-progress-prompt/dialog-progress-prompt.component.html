@@ -1,0 +1,57 @@
+
+  <form [formGroup]="mainProjectForm" (ngSubmit)="onSubmit()">
+  <nb-card>
+    <nb-card-header><h2><b> <nb-icon icon="file-text"  pack="eva"></nb-icon>File Upload</b></h2></nb-card-header>
+    <nb-card-body>
+      <div class="row"  *ngFor="let column of getColumnControls.controls; let i = index"  [formGroup]="column" >
+
+
+        <!-- <div class="col-sm-6">
+          <label for="inputFirstName" class="label"><nb-icon icon="text"  pack="eva"></nb-icon> 
+         Column name</label>
+             <div class="form-group">
+             <input type="text" nbInput formControlName="columns" disabled ="true" placeholder="{{getLabel(column.controls)}}"
+             
+              fullWidth fieldSize="medium"> -->
+              <!-- <ng-container *ngIf="(column.controls.fileName.value != '' && column.controls.columns.value == '' ) && submitted">
+                  <p class="caption status-danger" *ngIf="column.controls.fileName.value != ''">
+                    Column cannot be empty you have upload file
+                  </p>
+                  
+                </ng-container> -->
+               <!-- </div>
+              </div> -->
+
+
+
+
+        <div class="col-sm-6">
+          <!-- <label for="inputFirstName" class="label"><nb-icon icon="clipboard-outline"  pack="eva"></nb-icon> 
+             Column Name</label> -->
+             <div class="form-group">
+               <label for="inputFirstName" class="label" > <nb-icon icon="clipboard-outline"  pack="eva"></nb-icon> Choose a file for {{getLabel(column.controls)}}</label>
+             <input type="file" nbInput formControlName="file"  (change)="uploadFile($event ,column ,index )"
+              [status]="'basic'"
+              fullWidth fieldSize="medium" placeholder="Column name">
+              <!-- <ng-container *ngIf="column.controls.fileName.errors && submitted">
+                  <p class="caption status-danger" *ngIf="column.controls.fileName.errors.required">
+                   File is required
+                  </p>
+                </ng-container> -->
+               </div>
+              </div>
+  
+
+                    <div class="col-sm-2">
+                      
+                    </div>
+        
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton type="submit" class="cancel" status="info">Upload Files</button>
+        &nbsp;
+        <button nbButton (click)="submit()" class="cancel" status="danger">Cancel</button>
+    </nb-card-footer>
+  </nb-card>
+</form>

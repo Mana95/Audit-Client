@@ -1,0 +1,103 @@
+<folder-creation (outPutEditData)="recviceFolderCreation($event)"></folder-creation>
+<form [formGroup]="fileUpladerGroup" (ngSubmit)="onSubmit()">
+<nb-card>
+    <nb-card-header>
+        <button type="button" (click)="RoutePage()" ghost Rou nbButton><nb-icon icon="arrow-back-outline"  pack="eva"></nb-icon></button>
+        <nb-icon icon="book-open-outline"  pack="eva"></nb-icon>Formular upload
+    </nb-card-header>
+
+    <nb-card-body>
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputFirstName" class="label"><nb-icon icon="file-outline"  pack="eva"></nb-icon>Nume Upload</label>
+            <input type="text" nbInput formControlName="fileName"
+            [status]="submitted ?(formData.fileName.errors?'danger':'success'):'basic'"
+            fullWidth fieldSize="medium" placeholder="File Name">
+            <ng-container *ngIf="formData.fileName.errors && submitted">
+              <p class="caption status-danger" *ngIf="formData.fileName.errors.required">
+                Nume Upload este necesară!!
+              </p>
+            </ng-container>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputFirstName" class="label"><nb-icon icon="folder-outline"  pack="eva"></nb-icon>Nume Folder</label>
+            <nb-select placeholder="Alege Folder"   fullWidth fieldSize="medium"   [status]="submitted ?(formData.folderName.errors?'danger':'success'):'basic'"
+            formControlName="folderName">
+             <nb-option [value]="selectOption?.name" *ngFor ="let selectOption of displayDropDownData">{{selectOption?.name}}</nb-option>
+             <!-- <nb-option value="1">onGoing</nb-option> -->
+           </nb-select>
+            <ng-container *ngIf="formData.folderName.errors && submitted">
+              <p class="caption status-danger" *ngIf="formData.folderName.errors.required">
+                Nume Folder este necesară!!
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group">
+            <label for="inputLastName" class="label">
+              <nb-icon icon="file-add-outline"  pack="eva"></nb-icon>
+              Browse</label>
+              <input type="file"    ng2FileSelect  (change)="uploadFile($event)"  nbInput formControlName="file"
+              [status]="submitted ?(formData.file.errors?'danger':'success'):'basic'"
+              fullWidth fieldSize="medium" placeholder="Project Name">
+              <ng-container *ngIf="formData.file.errors && submitted">
+                <p class="caption status-danger" *ngIf="formData.file.errors.required">
+                  Niciun fisier selectat
+                </p>
+              </ng-container>
+          </div>
+        </div>
+      </div>
+
+
+
+      <button type="submit" nbButton status="success"><nb-icon icon="checkmark-outline"  pack="eva"></nb-icon>Upload</button>
+    </nb-card-body>
+
+  </nb-card>
+    </form>
+
+<div class="col-xxl-12">
+  <div class="col-xxl-12 up-view">
+    <div class="row">
+      <div class="col-md-12" *ngIf="showProjectTable">
+        <nb-card>
+          <nb-card-body>
+<h2 class=""> <nb-icon  icon="archive-outline" pack="eva"></nb-icon>Documente </h2>
+<label class="search-label" for="search">Search:</label>
+<input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
+<br/>
+<table [nbTreeGrid]="dataSource" [nbSort]="dataSource" (sort)="updateSort($event)">
+  <tr nbTreeGridHeaderRow *nbTreeGridHeaderRowDef="allColumns"></tr>
+  <tr nbTreeGridRow *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+  <ng-container *ngFor="let column of allColumns; let index = index"
+                [nbTreeGridColumnDef]="column">
+    <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+      {{column}}
+    </th>
+    <td nbTreeGridCell *nbTreeGridCellDef="let row" >
+        <div *ngIf="index !=3 && index != 4">{{row.data[column] || '-'}}</div>
+        <button nbButton ghost  *ngIf="index ==3" status="danger" (click)="deleteFile(row)"><nb-icon icon="trash-2"  pack="eva"></nb-icon></button>
+
+
+        <!-- <button nbButton ghost (click)="onClickEdit(row)" *ngIf="index ==6"><nb-icon icon="edit-outline"  pack="eva"></nb-icon></button> -->
+       <button nbButton ghost  *ngIf="index ==4" (click)="downloadFile(row)"><nb-icon icon="download-outline"  pack="eva"></nb-icon>Deschide</button>
+
+
+
+  </ng-container>
+</table>
+            </nb-card-body>
+          </nb-card>
+        </div>
+      </div>
+    </div>
+</div>
+
+
+  <!-- ///////////////////////sasasa -->

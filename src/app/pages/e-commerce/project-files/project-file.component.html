@@ -1,0 +1,39 @@
+<nb-card>
+    <nb-card-header>
+        <h3>
+            File List for the project <nb-icon icon="list"  pack="eva"></nb-icon>
+            <button type="button" (click)="RoutePage()" ghost Rou nbButton><nb-icon icon="arrow-back-outline"  pack="eva"></nb-icon></button>
+        </h3>
+        </nb-card-header>
+        <nb-card-body>
+            <label class="search-label" for="search">Search:</label>
+            <input nbInput [nbFilterInput]="dataSource" id="search" class="search-input">
+            <table [nbTreeGrid]="dataSource"  [nbSort]="dataSource" (sort)="updateSort($event)" equalColumnsWidth>
+                <tr nbTreeGridHeaderRow  *nbTreeGridHeaderRowDef="allColumns"></tr>
+                <tr nbTreeGridRow  *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+                <ng-container *ngFor="let column of allColumns; let index = index"
+                              [nbTreeGridColumnDef]="column"
+                             >
+                  <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+                    {{column}}
+                  </th>
+           
+
+                  <td nbTreeGridCell *nbTreeGridCellDef="let row"  >
+                      <div  *ngIf="index !=3" >{{row.data[column] || '-'}}</div>
+                      <button nbButton ghost (click)="downloadFile(row)" *ngIf="index ==3"  nbTooltipPlacement="top" nbTooltipStatus="info"  nbTooltip="View file"><nb-icon icon="eye-outline"  pack="eva"></nb-icon></button>
+                
+                      <button nbButton ghost (click)="onClickDelete(row)" *ngIf="index ==3"  nbTooltipPlacement="top" nbTooltipStatus="danger"  nbTooltip="Delete  project"><nb-icon icon="trash-2-outline"  pack="eva"></nb-icon></button>
+              
+                   
+              
+                  </td>
+                
+                </ng-container>
+              
+              </table>
+    
+
+
+            </nb-card-body>
+    </nb-card>

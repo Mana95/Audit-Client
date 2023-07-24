@@ -1,0 +1,128 @@
+// Kylie Rocket
+
+
+
+button[nbTreeGridRowToggle] {
+
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
+  
+  .search-label {
+    display: block;
+  }
+  .search-input {
+    margin-bottom: 1rem;
+  }
+  
+  .nb-column-name {
+    width: 100%;
+  }
+  
+  @media screen and (min-width: 400px) {
+    .nb-column-name,
+    .nb-column-size {
+      width: 50%;
+    }
+  }
+  
+  @media screen and (min-width: 500px) {
+    .nb-column-name,
+    .nb-column-size,
+    .nb-column-kind {
+      width: 33.333%;
+    }
+  }
+  
+  @media screen and (min-width: 600px) {
+    .nb-column-name {
+      width: 31%;
+    }
+    .nb-column-size,
+    .nb-column-kind,
+    .nb-column-items {
+      width: 23%;
+    }
+  }
+
+  // .table-row{
+  //   background: #014dff;
+  // }
+
+  div.scrollmenu {
+    background-color: #2f3658;
+    overflow: auto;
+    white-space: nowrap;
+  }
+  .example {
+    overflow-wrap: break-word;
+   
+    hyphens: auto;
+    max-width: 200px;
+  }
+  .a-example{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  div.scrollmenu table {
+    display: inline-block;
+    text-align: left;
+    table-layout: fixed;
+    padding: 14px;
+    
+  }
+  
+  div.scrollmenu table:hover {
+    background-color:  #2f3658;
+  }
+  ::-webkit-scrollbar{
+    height: 4px;
+    width: 4px;
+    background: #414764;
+}
+::-webkit-scrollbar-thumb:horizontal{
+    background: #334dcc;
+    border-radius: 10px;
+}
+ 
+.scrollmenu {
+
+  margin: auto;
+  overflow: hidden;
+  white-space: nowrap;
+  box-shadow: 0 0 10px #000; 
+}
+// table.a {
+ 
+//   width: 100%;  
+// }
+
+
+
+// table td {width:100px; word-wrap:break-word;}
+// /* Track */ 
+// ::-webkit-scrollbar-track { 
+//   background: gainsboro; 
+//   border-radius: 5px; 
+// } 
+
+/* Handle */ 
+
+// .Container
+// {
+//     width: auto;
+//     overflow: auto;
+//     white-space: nowrap;
+// }
+// .Content
+// {
+//     width: 1200px;
+// }
+
+// .Flipped, .Flipped .Content
+// {
+//     transform:rotateX(180deg);
+//     -ms-transform:rotateX(180deg); /* IE 9 */
+//     -webkit-transform:rotateX(180deg); /* Safari and Chrome */
+// }

@@ -1,0 +1,11 @@
+<h1><nb-icon icon="calendar-outline"  pack="eva"></nb-icon>Calendar proiecte
+     <button nbButton ghost status="success" (click)="toggleWeekends()"><nb-icon icon="clock-outline"  pack="eva"></nb-icon>Arata weekend-uri</button>&nbsp;
+     <button nbButton ghost nbTooltip="Proiectele finalizate au culoarea albastra" nbTooltipPlacement="top" nbTooltipStatus="info" status="info"><nb-icon icon="bulb-outline"  pack="eva"></nb-icon></button>&nbsp;
+     <button nbButton ghost  nbTooltip="Proiectele cu deadline depasit au culoarea rosie" nbTooltipPlacement="top" nbTooltipStatus="danger" status="danger"><nb-icon icon="bulb-outline"  pack="eva"></nb-icon></button>&nbsp;
+     <button nbButton ghost nbTooltip="Proiectele cu deadline apropiat au culoarea galbena" nbTooltipPlacement="top" nbTooltipStatus="warning"  status="warning"><nb-icon icon="bulb-outline"  pack="eva"></nb-icon></button>&nbsp;
+     <button nbButton ghost nbTooltip="Proiectele active au culoarea verde" nbTooltipPlacement="top" nbTooltipStatus="success"  status="success"><nb-icon icon="bulb-outline"  pack="eva"></nb-icon></button>&nbsp;
+
+    </h1>
+
+
+<full-calendar  deepChangeDetection="true"    [options]="calendarOptions"></full-calendar>

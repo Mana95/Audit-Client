@@ -1,0 +1,95 @@
+<form [formGroup]="mainProjectForm" (ngSubmit)="onSubmit()">
+<nb-card>
+    <nb-card-header>
+        <button type="button" (click)="OnclickRouteDashboard()" ghost Rou nbButton><nb-icon icon="arrow-back-outline"  pack="eva"></nb-icon></button>
+
+        <h3 *ngIf="!showNewForm"> <nb-icon icon="book-open-outline"  pack="eva"></nb-icon>{{ProjectLabel}} editați formularul
+           <button type="button" [disabled] ="(disabledValue)?true:false"  (click)="onClickComplete()" nbButton  status="primary"><nb-icon icon="done-all-outline"  pack="eva"></nb-icon>COMPLETE TASK</button>
+
+          </h3>
+        <h3 *ngIf="showNewForm"><nb-icon icon="plus-square-outline"  pack="eva"></nb-icon>
+         <!-- Numele Proiectului    -->
+          {{newProjectName| uppercase}}
+        </h3>
+        <br>
+        <nb-alert status="success" *ngIf="(!showNewForm && displayStatus) || disabledValue" >This Project is Completed</nb-alert>
+        <div class="row">
+  <!-- <div class="col-sm-3">
+    <label for="inputFirstName"  class="label"><nb-icon icon="info-outline"  pack="eva"></nb-icon>
+      Project Deadline</label>
+     <input  nbTooltipPlacement="right" nbTooltipStatus ="info" nbTooltip="how many date would be display as deadline" nbInput type="number" [(ngModel)]="projectDeadline" [ngModelOptions]="{standalone: true}" min="1" placeholder="Number" fullWidth fieldSize="medium">
+    </div> -->
+  </div>
+      </nb-card-header>
+
+    <nb-card-body>
+      <div *ngFor="let form_elem of columnfields[0]; let i = index">
+      <div  [ngSwitch]="form_elem?.type" class="row" >
+        <!-- Project name -->
+        <div class="col-sm-12" *ngSwitchCase="'text'">
+          <div class="form-group">
+            <label for="inputFirstName" class="label"><nb-icon icon="text-outline"  pack="eva"></nb-icon>
+            {{form_elem?.columnName}}</label>
+            <input type="text" nbInput formControlName="{{form_elem?.dbName}}"
+            [status]="submitted ?(f[form_elem.dbName].errors?'danger':'success'):'basic'"
+            fullWidth fieldSize="medium" placeholder="{{form_elem?.columnName}}">
+            <ng-container *ngIf="f[form_elem.dbName].errors && submitted">
+              <p class="caption status-danger" *ngIf="f[form_elem.dbName].errors.required">
+               {{form_elem?.columnName}}!
+              </p>
+            </ng-container>
+          </div>
+        </div>
+
+
+        <!-- Start Date -->
+
+      </div>
+
+      <!-- <div  [ngSwitch]="form_elem.type" class="row"  *ngIf="!formEditType || formEditType">
+        <div class="col-sm-12" *ngSwitchCase="'File'">
+          <div class="form-group">
+            <label for="inputFirstName" class="label"><nb-icon icon="file-add"  pack="eva"></nb-icon>
+            {{form_elem?.columnName}}</label>
+            <input nbInput type="file" ng2FileSelect formControlName="{{form_elem?.dbName}}"   (change)="uploadFile($event ,form_elem?.columnName )"
+            placeholder="{{form_elem?.columnName}}"
+                [status]="submitted ?(f[form_elem?.dbName].errors?'danger':'success'):'basic'"
+                 fullWidth fieldSize="medium"  > -->
+                <!-- <nb-datepicker format="yyyy-MM-dd" #formcontrolcorrective></nb-datepicker> -->
+            <!-- <ng-container *ngIf="f[form_elem?.dbName].errors && submitted">
+              <p class="caption status-danger" *ngIf="f[form_elem?.dbName].errors.required">
+               {{form_elem?.columnName}}!
+              </p>
+            </ng-container> -->
+          <!-- </div>
+        </div>
+        </div> -->
+      <div  [ngSwitch]="form_elem.type" class="row" >
+        <div class="col-sm-12" *ngSwitchCase="'Date'">
+          <div class="form-group">
+            <label for="inputFirstName" class="label"><nb-icon icon="calendar-outline"  pack="eva"></nb-icon>
+            {{form_elem?.columnName}}</label>
+            <input nbInput   formControlName="{{form_elem?.dbName}}" placeholder="{{form_elem?.columnName}}"
+                [status]="submitted ?(f[form_elem?.dbName].errors?'danger':'success'):'basic'"
+                 fullWidth fieldSize="medium"  [nbDatepicker]="formcontrolcorrective">
+                <nb-datepicker format="yyyy-MM-dd" #formcontrolcorrective></nb-datepicker>
+            <ng-container *ngIf="f[form_elem?.dbName].errors && submitted">
+              <p class="caption status-danger" *ngIf="f[form_elem?.dbName].errors.required">
+               {{form_elem?.columnName}}!
+              </p>
+            </ng-container>
+          </div>
+        </div>
+        </div>
+    </div>
+
+
+
+
+
+      <button type="submit" nbButton status="success"><nb-icon icon="checkmark-outline"  pack="eva"></nb-icon>{{formButtonLabel}}</button>
+    </nb-card-body>
+
+  </nb-card>
+
+</form>

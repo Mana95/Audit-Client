@@ -1,0 +1,76 @@
+<form [formGroup]="folderUpload" (ngSubmit)="onSubmit()">
+    <nb-card>
+        <nb-card-header>
+            <button type="button" (click)="OnclickRouteDashboard()" ghost Rou nbButton><nb-icon icon="arrow-back-outline"  pack="eva"></nb-icon></button>
+     
+            <h3> <nb-icon icon="book-open-outline"  pack="eva"></nb-icon>Creeaza fisier nou
+            
+              <!-- <button type="button" (click)="OnClickViewFolder()" status="primary"  nbButton><nb-icon icon="eye"  pack="eva"></nb-icon>vizualizați folderele</button>
+           -->
+            </h3>
+           
+            </nb-card-header>
+
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputFirstName" class="label"><nb-icon icon="file-outline"  pack="eva"></nb-icon>Nume Folder</label>
+        
+                            <input type="text" nbInput formControlName="folderName"
+                            [status]="submitted ?(formData.folderName.errors?'danger':'success'):'basic'"
+                            fullWidth fieldSize="medium" placeholder="Folder Name">
+                            <ng-container *ngIf="formData.folderName.errors && submitted">
+                              <p class="caption status-danger" *ngIf="formData.folderName.errors.required">
+                                Folder Name is required!
+                              </p>
+                            </ng-container>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" nbButton status="success"><nb-icon icon="checkmark-outline"  pack="eva"></nb-icon>Create Folder</button>
+                </nb-card-body>
+        </nb-card>
+
+    </form>
+
+    <nb-card *ngIf="displayCard">
+
+        <nb-card-header>
+                      <h4> <nb-icon icon="more-vertical-outline"  pack="eva"></nb-icon>Alege folderul pentru a vedea fisierele</h4>
+           
+            </nb-card-header>
+
+            <nb-card-body>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="inputFirstName" class="label"><nb-icon icon="file-outline"  pack="eva"></nb-icon>Nume Folder</label>
+                            <nb-select placeholder="Alege Folder"  (selectedChange)="onChangeDataDisplay()" fullWidth fieldSize="medium"  
+                            [(ngModel)]="dropdownData">
+                             <nb-option [value]="dropDown?.name" *ngFor="let dropDown of apiReturnData">{{dropDown?.name}}</nb-option>
+                             <!-- <nb-option value="1">onGoing</nb-option> -->
+                           </nb-select>
+                            </div>
+                    </div>
+                    </div>
+                </nb-card-body>
+
+    
+        </nb-card>
+        <nb-alert status="danger" *ngIf="showAlert">
+          Folderul este gol</nb-alert>
+   
+        <nb-card size="small" *ngIf="selectedDropDown" >
+            <nb-list>
+              <nb-list-item *ngFor="let user of users">
+                <nb-user [name]="user.name" [title]="user.title" >
+                </nb-user>
+                <button type="button" ghost style="margin-left: auto;" (click)="downloadFile(user)" nbButton status="success"><nb-icon icon="download-outline"  pack="eva"></nb-icon></button>
+                
+              </nb-list-item>
+            </nb-list>
+          </nb-card>
+
+

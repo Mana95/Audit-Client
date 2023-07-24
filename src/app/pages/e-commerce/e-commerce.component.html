@@ -1,0 +1,55 @@
+<div class="row">
+  <!-- dsdsHeader Section of the ProjectSummary -->
+<div class="col-xxl-12">
+    <div class="row">
+      <div class="col-md col-sm-12" *ngFor="let card of cardStatusArray">
+        <ngx-profit-card [cardObject]="card"></ngx-profit-card>
+      </div>
+    </div>
+    <nb-card>
+
+      <nb-card-body>
+        <nb-search type="rotate-layout" (click)="onClickSearch()" ></nb-search>
+      </nb-card-body>
+    </nb-card>
+    <div class="col-xxl-12 up-view">
+      <div class="row">
+        <!-- <button nbButton  *ngIf="!showProjectTable" style="align-items: right;"  status="primary" (click)="newProject()"><nb-icon icon="plus-circle-outline"  pack="eva"></nb-icon>Proiect nou</button> -->
+
+        <div class="col-md-12" *ngIf="showProjectTable && showSection">
+          <nb-card>
+            <nb-card-body>
+    <h2 class=""> <nb-icon  icon="activity-outline" pack="eva" ></nb-icon> {{ProjectName | uppercase }}
+
+  <!-- <button nbButton ghost status="danger" (click)="navigate('down-view')"><nb-icon icon="arrowhead-down-outline"  pack="eva"></nb-icon></button> -->
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <button nbButton style="align-items: right;"  status="primary" (click)="newProject()"><nb-icon icon="plus-circle-outline"  pack="eva"></nb-icon>TASK NOU</button>
+
+</h2>
+<button nbButton ghost status="primary" (click)="navigate('down-calendar')"><nb-icon icon="calendar-outline"  pack="eva"></nb-icon>View calendar</button>
+
+
+
+ <project-view  [tableColumns]="tableColumns" (deleteData)="reciveDelete($event)"
+ (fileUploadEmitter)="reciveFileUpload($event)"  [inputTableData]="ongoingProjectArray" [completeState]="statesCompleted" (outPutEditData)="reciveopenEditData($event)"></project-view>
+
+
+
+<app-website-template   [divData]="divData" ></app-website-template>
+
+
+              </nb-card-body>
+            </nb-card>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+</div>
+<div class="col-xxl-12 down-calendar" *ngIf="showProjectTable">
+<project-calander  (outPutEditDataCalender)="reciveopenCalenderData($event)"></project-calander></div>

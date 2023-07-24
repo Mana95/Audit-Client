@@ -1,0 +1,76 @@
+<label class="search-label" for="search">Cauta:</label>
+<input nbInput [nbFilterInput]="dataSource" id="search" class="search-input"> &nbsp; &nbsp; &nbsp; &nbsp;
+  <button nbButton   style="align-content: right;" *ngIf="(data.length != 0)?true: false" (click)="generatePdf($event)"><nb-icon icon="printer-outline"  pack="eva"></nb-icon> GENERARE PDF</button>
+  &nbsp; &nbsp; 
+  <button nbButton  (click)="onClickTableNavigate('left')" ghost nbTooltipPlacement="top" nbTooltip="Navigate left" nbTooltipStatus="primary"><nb-icon icon="arrow-circle-left"  status="info"  pack="eva"></nb-icon></button>
+  &nbsp; 
+  <button nbButton (click)="onClickTableNavigate('right')" ghost nbTooltipPlacement="top" nbTooltip="Navigate right" nbTooltipStatus="primary"><nb-icon icon="arrow-circle-right" status="info"  pack="eva"></nb-icon></button>
+
+  <script src="http://asvd.github.io/dragscroll/dragscroll.js"></script>
+  <!-- <perfect-scrollbar style="max-width: 1300px; max-height: 400px;" > -->
+    <!-- <div class="Content  Flipped">  -->
+      <div class="scrollmenu"  >
+        <!-- <div class="Content"> -->
+    <table  #widgetsContent class="a" [nbTreeGrid]="dataSource"  [nbSort]="dataSource" (sort)="updateSort($event)" equalColumnsWidth>
+ 
+      <tr nbTreeGridHeaderRow  *nbTreeGridHeaderRowDef="allColumns"></tr>
+      <tr nbTreeGridRow  *nbTreeGridRowDef="let row; columns: allColumns"></tr>
+    
+      <!-- <ng-container [nbTreeGridColumnDef]="customColumn">
+        <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(customColumn)" *nbTreeGridHeaderCellDef>
+          {{customColumn}}
+        </th>
+        <td nbTreeGridCell *nbTreeGridCellDef="let row">
+          {{row.data[customColumn]}}
+        </td>
+      </ng-container> -->
+    
+      <ng-container *ngFor="let column of allColumns; let index = index"
+                    [nbTreeGridColumnDef]="column"
+                   >
+        <th nbTreeGridHeaderCell [nbSortHeader]="getSortDirection(column)" *nbTreeGridHeaderCellDef>
+          {{column}}
+        </th>
+        <!-- [ngClass]="{'table-row': row.data['status'] == '2'}" -->
+        <!-- *ngIf="index !=5 && index!=6 &&  index!= 4 && index !=allColumns.length -1" -->
+        <td  class="example"   style="color: white;" nbTreeGridCell *nbTreeGridCellDef="let row" [nbTooltipTrigger]="popToolTip(row.data['Auditor'])"  [nbTooltip]="row.data['Auditor']"    nbTooltipPlacement="left" nbTooltipStatus ="info">
+          
+            <div  class=" " *ngIf="checkValidationDisplay(index , 'text')"  
+            
+            [ngStyle]="{'background-color': checkStatus(row.data ,column ) }" 
+            >
+            <a class="a-example">{{row.data[column] || '-'}}</a>
+           </div>
+            <button nbButton ghost (click)="onClickEdit(row)" *ngIf="checkValidationDisplay(index , 'button')" nbTooltipPlacement="top" nbTooltipStatus="primary"  nbTooltip="Edit sub project" ><nb-icon icon="edit-outline"  pack="eva"></nb-icon></button>
+           <!-- <button nbButton ghost  *ngIf="index ==5" (click)="generatePdf(row)"><nb-icon icon="printer-outline"  pack="eva"></nb-icon></button> -->
+           <button   *ngIf="checkValidationDisplay(index , 'NO')"
+             nbButton  [nbTooltip]="getDisplayStatus(row)?.nbTooltip" nbTooltipPlacement="top"
+              [nbTooltipStatus]="getDisplayStatus(row)?.status" 
+               [status]="getDisplayStatus(row)?.status">{{row.data[column] || '-'}}</button>&nbsp;
+
+               
+               <button nbButton ghost (click)="onclickPop(row)" *ngIf="checkValidationDisplay(index , 'file') && fileField" 
+               nbTooltipPlacement="top" nbTooltipStatus="info"
+                 nbTooltip="click to upload file for the project"><nb-icon icon="upload"  pack="eva"></nb-icon></button>
+                 <button nbButton ghost (click)="navigateFile(row)" *ngIf="checkValidationDisplay(index , 'file') && fileField" 
+                 nbTooltipPlacement="top" nbTooltipStatus="info"
+                   nbTooltip="View project Files"><nb-icon icon="eye"  pack="eva"></nb-icon></button>
+               <!-- <button nbButton ghost (click)="addFile(row)" *ngIf="checkValidationDisplay(index , 'button')" nbTooltipPlacement="top" nbTooltipStatus="info"  nbTooltip="add files to project"><nb-icon icon="attach"  pack="eva"></nb-icon></button>
+         -->
+           <button nbButton ghost (click)="onClickDelete(row)" *ngIf="checkValidationDisplay(index , 'button')" nbTooltipPlacement="top" nbTooltipStatus="danger"  nbTooltip="Delete sub project"><nb-icon icon="trash-2-outline"  pack="eva"></nb-icon></button>
+        
+          <!-- <nb-alert ghost
+          [status] ="setStatus(row)"
+         >status</nb-alert> -->
+        </td>
+      
+      </ng-container>
+    
+    </table>
+    <!-- </div> -->
+    </div>
+  <!-- </perfect-scrollbar> -->
+ 
+
+<nb-alert status="info" *ngIf="inputTableData.length == 0">Nu exista taskuri adaugate la proiect!</nb-alert>
+  

@@ -1,0 +1,84 @@
+<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <nb-card>
+        <nb-card-header>
+            <h3>
+             {{ProjectName}} informație  <nb-icon icon="checkmark-circle"  pack="eva"></nb-icon> &nbsp;  
+            
+             <button type="button" nbTooltip='Înapoi la Lista Proiecte ' nbTooltipPlacement="right" nbTooltipStatus="primary" (click)="onClickNavigate()" ghost nbButton status="primary"><nb-icon icon="arrow-back" status="primary"  pack="eva"></nb-icon></button>    
+             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            
+             <button type="button" nbTooltip='
+             Accesați pagina principală' nbTooltipPlacement="right"  nbTooltipStatus="success" (click)="onClickNavigate(true)" ghost nbButton status="success"><nb-icon icon="home" status="success"  pack="eva"></nb-icon></button>    
+               
+            </h3> 
+            <br>
+          </nb-card-header>
+     
+        <nb-card-body>
+            <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="inputFirstName"  class="label"><nb-icon icon="clipboard-outline"  pack="eva"></nb-icon> 
+                      Nume Proiect</label>
+                        <input type="text" disabled="true" nbInput formControlName="mainProjectName"
+           
+            fullWidth fieldSize="medium" placeholder="Nume Proiect">
+         
+            </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group">
+                          <label for="inputFirstName" class="label"><nb-icon icon="clipboard-outline"  pack="eva"></nb-icon> 
+                            Created Date</label>
+                              <input type="text" disabled="true" nbInput formControlName="createdDate"
+                 
+                  fullWidth fieldSize="medium" placeholder="Nume Proiect">
+               
+                  </div>
+                          </div>
+                </div>
+        </nb-card-body>
+                <nb-card-body>
+                <div class="row"  *ngFor="let column of getColumnControls.controls; let i = index"  [formGroup]="column" >
+                    <div class="col-sm-8">
+                        <!-- <label for="inputFirstName" class="label"><nb-icon icon="clipboard-outline"  pack="eva"></nb-icon> 
+                           Column Name</label> -->
+                           <div class="form-group">
+                           <input type="text" nbInput  fullWidth formControlName="columnName" disabled="true">
+                             </div>
+                            </div>
+                            <div class="col-sm-2" >
+                              <div class="form-group" *ngIf="column.controls.type.value == 'Date' && column.controls.columnName.value != 'startDate'">
+                                <input type="number" disabled="true" nbInput formControlName="deadline"
+                                nbTooltip='Deadine reach number' nbTooltipPlacement="right"  nbTooltipStatus="info"
+                                 [status]="submitted ?(column.controls.deadlineNumber.errors?'danger':'success'):'basic'"
+                                 fullWidth fieldSize="medium" placeholder="Deadline number">
+                                </div>
+                         
+                              </div> 
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                  <nb-select fullWidth placeholder="Alege Folder" formControlName="type" disabled="true">
+                                    <nb-option value="text">text</nb-option>
+                                    <nb-option value="Date">Date</nb-option>
+                                  </nb-select>
+                                  </div>
+                           
+                                </div>
+                
+                            <!-- <div class="col-sm-2">
+                              
+                                <button type="button"  [disabled]="getDisablity(column.controls.columnName)" nbTooltip='Remove field' nbTooltipPlacement="right" nbTooltipStatus="danger" (click)="onClickRemoveFields(i)" ghost nbButton status="danger"><nb-icon icon="minus-circle-outline"  pack="eva"></nb-icon></button>
+                              </div> -->
+                            
+                              
+                </div>
+
+
+
+
+
+                
+            </nb-card-body>
+        </nb-card>
+    </form>

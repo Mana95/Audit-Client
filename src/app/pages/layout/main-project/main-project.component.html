@@ -1,0 +1,119 @@
+<form [formGroup]="mainFormGroup" (ngSubmit)="onSubmit()">
+    <nb-card>
+        <nb-card-header>
+            <h3>
+              Proiect Nou      <nb-icon icon="file-add-outline"  pack="eva"></nb-icon> &nbsp;  
+               
+            </h3> 
+            
+            <br>
+          </nb-card-header>
+          <nb-card-body>
+            <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="inputFirstName" class="label"><nb-icon icon="clipboard-outline"  pack="eva"></nb-icon> 
+                      Nume Proiect</label>
+                        <input type="text" nbInput formControlName="mainProjectName"
+            [status]="submitted ?(formData.mainProjectName.errors?'danger':'success'):'basic'"
+            fullWidth fieldSize="medium" placeholder="Nume Proiect">
+            <ng-container *ngIf="formData.mainProjectName.errors && submitted">
+              <p class="caption status-danger" *ngIf="formData.mainProjectName.errors.required">
+                Nume Proiect is required!
+              </p>
+            </ng-container>
+            </div>
+                    </div>
+                </div>
+                <hr/>
+                <button type="button" (click)="OnclickAddField()" nbButton status="primary"><nb-icon icon="plus-circle-outline"  pack="eva"></nb-icon>Add Field</button>
+                &nbsp;&nbsp;
+                <button type="button" [disabled] ="(formData.columnsFields.value.length == 0)?true:false" (click)="onClickRemoveFields()" nbButton status="danger"><nb-icon icon="trash-2"  pack="eva"></nb-icon>Remove all</button>
+ 
+                <hr/>
+
+  <div class="row"  *ngFor="let column of getColumnControls.controls; let i = index"  [formGroup]="column" >
+    <div class="col-sm-6">
+        <!-- <label for="inputFirstName" class="label"><nb-icon icon="clipboard-outline"  pack="eva"></nb-icon> 
+           Column Name</label> -->
+           <div class="form-group">
+           <input type="text" nbInput formControlName="columnName" [readonly]="getDisablity(column.controls.columnName)"
+            *ngIf="getDisablity(column.controls.columnName)"
+            [nbTooltip]='ngToolTip(column.controls.columnName)' nbTooltipPlacement="right" nbTooltipStatus="warning"
+
+            [status]="submitted ?(column.controls.columnName.errors?'danger':'success'):'basic'"
+            fullWidth fieldSize="medium" placeholder="Column name">
+
+            <input type="text" nbInput formControlName="columnName" 
+            *ngIf="!getDisablity(column.controls.columnName)"
+          
+ 
+             [status]="submitted ?(column.controls.columnName.errors?'danger':'success'):'basic'"
+             fullWidth fieldSize="medium" placeholder="Column name">
+
+
+            <ng-container *ngIf="column.controls.columnName.errors && submitted">
+                <p class="caption status-danger" *ngIf="column.controls.columnName.errors.required">
+                    Column name is required!
+                </p>
+              </ng-container>
+             </div>
+            </div>
+             
+            <div class="col-sm-2">
+            
+           
+                <div class="form-group">
+                  <nb-select placeholder="Alege Folder" formControlName="type" [disabled]="getDisablity(column.controls.columnName)">
+                    <nb-option value="text">text</nb-option>
+                    <nb-option value="Date">Date</nb-option>
+                    <nb-option value="File">File</nb-option>
+                  </nb-select>
+                  </div>
+           
+                </div>
+                <div class="col-sm-2" >
+                  <div class="form-group" *ngIf="column.controls.type.value == 'Date'">
+                    <input type="number" nbInput formControlName="deadlineNumber"
+                    nbTooltip='Deadine reach number' nbTooltipPlacement="right"  nbTooltipStatus="info"
+                     [status]="submitted ?(column.controls.deadlineNumber.errors?'danger':'success'):'basic'"
+                     fullWidth fieldSize="medium" placeholder="Deadline number">
+                    </div>
+             
+                  </div>   
+            <div class="col-sm-2">
+              
+                <button type="button"  [disabled]="getDisablity(column.controls.columnName)" nbTooltip='Remove field' nbTooltipPlacement="right" nbTooltipStatus="danger" (click)="onClickRemoveFields(i)" ghost nbButton status="danger"><nb-icon icon="minus-circle-outline"  pack="eva"></nb-icon></button>
+              </div>
+            
+              
+</div>
+   
+
+<br/>
+<nb-alert status="warning" *ngIf="(formData.columnsFields.value.length == 0)?true:false"><b>Warning. Please make sure to add some fields!</b></nb-alert>
+   
+<button type="submit" [disabled]="(formData.columnsFields.value.length == 0)?true:false" nbButton status="success"><nb-icon icon="done-all"  pack="eva"></nb-icon>Create</button>
+  
+            </nb-card-body>
+            
+        </nb-card>
+    </form>
+
+<!-- <div class="project-view" *ngIf="showListProject">
+  <project-list   (deleteEmitter)="deleteRecive($event)"></project-list>
+  </div> -->
+  
+    <!-- <nb-card>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <nb-select placeholder="Alege Folder">
+            <nb-option value="">select File</nb-option>
+            <nb-option value="text">text</nb-option>
+            <nb-option value="Date">Date</nb-option>
+          </nb-select>
+          </div>
+        </div>
+      </div>
+      </nb-card> -->

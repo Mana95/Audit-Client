@@ -1,0 +1,17 @@
+
+
+    <nb-card accent="primary" status="{{cardObject?.status}}">
+   <nb-card-header >
+    <nb-icon  [icon]="cardObject?.cardIcon" pack="eva"></nb-icon>
+        <span class="title">{{cardObject?.cardName}}</span>&nbsp;
+      </nb-card-header>
+      <nb-card-body size="tiny" >
+        <div class="text-center">
+          <h3>{{cardObject.progressbarValus || 0}}</h3>
+      </div>
+      </nb-card-body>
+
+    </nb-card>
+
+
+

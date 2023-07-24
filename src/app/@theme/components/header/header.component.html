@@ -1,0 +1,37 @@
+<div class="header-container">
+  <div class="logo-container">
+    <a (click)="toggleSidebar()" href="#" class="sidebar-toggle">
+      <nb-icon icon="menu-2-outline"></nb-icon>
+    </a>
+    <a class="logo" href="#" (click)="navigateHome()">FlyAudit</a>
+  </div>
+
+
+  <!-- <button nbButton  (click)="onClickTableNavigate('left')" ghost nbTooltipPlacement="top" nbTooltip="Navigate left" nbTooltipStatus="primary"><nb-icon icon="arrow-circle-left"  status="info"  pack="eva"></nb-icon></button>
+  &nbsp;
+  <button nbButton (click)="onClickTableNavigate('right')" ghost nbTooltipPlacement="top" nbTooltip="Navigate right" nbTooltipStatus="primary"><nb-icon icon="arrow-circle-right" status="info"  pack="eva"></nb-icon></button>
+   -->
+
+   
+</div>
+
+
+
+
+
+
+
+<div class="header-container">
+  <nb-actions size="small">
+    <nb-action class="user-action" *nbIsGranted="['view', 'user']" >
+      <nb-user
+               [onlyPicture]="userPictureOnly"
+               [name]="userData?.fullName"
+             >
+      </nb-user>
+    </nb-action>
+    <nb-action (click)="logout()" class="control-item" icon="log-out">
+    </nb-action>
+  </nb-actions>
+</div>
+
